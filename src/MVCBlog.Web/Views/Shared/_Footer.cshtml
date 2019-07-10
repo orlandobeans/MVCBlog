@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+@inject SignInManager<MVCBlog.Data.User> SignInManager
+@inject Microsoft.Extensions.Options.IOptionsMonitor<MVCBlog.Business.BlogSettings> BlogSettings
+
+
+<footer id="footer" class="light narrow">
+				<div class="footer-copyright">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<p><strong class="text-uppercase">Porto Photography</strong> - &copy; Copyright 2018 - All Rights Reserved.</p>
+							</div>
+						</div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                             @if (!SignInManager.IsSignedIn(User))
+                                {
+                                    if (BlogSettings.CurrentValue.NewUsersCanRegister)
+                                    {
+                                        <text>|</text>
+                                        <a asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-user-plus"></i></a>
+                                        <a asp-area="Identity" asp-page="/Account/Register">@Localizer["Register"]</a>
+                                    }
+                                    <text>|</text>
+                                    <a asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i></a>
+                                    <a asp-area="Identity" asp-page="/Account/Login">@Localizer["Login"]</a>
+                                }
+                                else
+                                {
+                                    <text>|</text>
+                                    <a asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-cog"></i></a>
+                                    <a asp-area="Identity" asp-page="/Account/Manage/Index">@Localizer["Settings"]</a>
+                                    <text>|</text>
+                                    <form style="display: inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Blog", new { area = "" })">
+                                        <button type="submit" class="btn btn-link" style="padding-left: 0;"><i class="fas fa-sign-out-alt"></i> @Localizer["Logout"]</button>
+                                    </form>
+                                }
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a asp-area="" asp-controller="Administration" asp-action="Index" class="nav-link text-dark"><i class="fas fa-tools"></i></a>
+                                    <link rel="alternate" type="application/rss+xml" title="@BlogSettings.CurrentValue.BlogDescription" href="@this.Context.Request.Scheme://@this.Context.Request.Host@this.Context.Request.PathBase}/Blog/Feed" />
+                                }
+                        </div>
+                        </div>
+                            </div>
+                            <div>
+				</div>
+                    </div>
+			</footer>

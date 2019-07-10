@@ -34,4 +34,8 @@
     <ProjectReference Include="..\MVCBlog.Data\MVCBlog.Data.csproj" />
     <ProjectReference Include="..\MVCBlog.Localization\MVCBlog.Localization.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Porto\" />
+  </ItemGroup>
 </Project>

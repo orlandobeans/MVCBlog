@@ -4,9 +4,8 @@
 @{
     ViewData["Title"] = Localizer["Blog"];
 }
-<h1>@ViewData["Title"]</h1>
 
-@if (!string.IsNullOrEmpty(this.Model.Tag) || !string.IsNullOrEmpty(this.Model.Search))
+@*@if (!string.IsNullOrEmpty(this.Model.Tag) || !string.IsNullOrEmpty(this.Model.Search))
 {
     <div class="card mt-3 mb-3">
         <div class="card-body">
@@ -70,4 +69,80 @@
             }
         }
     </div>
-</div>
+</div>*@
+
+                <section class="page-header page-header-modern page-header-background page-header-background-sm" style="background-image: url(/Porto/img/demos/photography/custom-header-bg.jpg);">
+					<div class="container">
+						<div class="row py-3">
+							<div class="col-md-12 align-self-center p-static order-2 text-center">
+								<h1 class="font-weight-normal text-12 m-0 pb-2">@ViewData["Title"]</h1>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div class="container p-0 pt-2">
+					<div id="ourBlog" class="p-0 mt-4">
+						<div class="col-sm-8 col-md-6 col-lg-4 isotope-item p-3">
+							
+								
+                                    @if (this.Model.Entries.TotalNumberOfItems > 0)
+                                        {
+                                            foreach (var entry in this.Model.Entries)
+                                            {
+                                            <article class="our-blog-item">
+                                                <a href="@entry.Url" class="text-decoration-none">
+                                                    <span class="image-wrapper">
+                                                        <img src="/Porto/img/demos/photography/blog/our-blog-1.jpg" alt="" class="img-fluid" />
+                                                    </span>
+
+                                                    <span class="category text-uppercase bg-color-quaternary">
+                                                        @entry.Tags.Select(x => x.Tag.Name).Single()
+                                                    </span>
+                                                </a>
+                                                <div class="post-infos">
+                                                    <div class="share">
+                                                        <div class="share-icons bg-color-quaternary">
+                                                            <a href="#" class="text-decoration-none" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                                            <a href="#" class="text-decoration-none" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                                                            <a href="#" class="text-decoration-none" title="Share on Linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                                            <i class="fas fa-share-alt"></i>
+                                                        </div>
+                                                    </div>
+                                                    <span class="post-date">
+                                                        @entry.CreatedOn.ToString("dd MMM yyyy").ToUpper()
+                                                    </span>
+                                                    <h1 class="font-weight-normal">
+                                                        <a href="@entry.Url" class="text-decoration-none">@entry.Header</a>
+                                                    </h1>
+                                                    <a href="@entry.Url" class="text-decoration-none">
+                                                        <p>@entry.ShortContent</p>
+                                                    </a>
+                                                </div>
+                                            </article>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <p>@Localizer["No blog posts available"]</p>
+                                        }
+									
+							
+						    </div>
+					    </div>
+					<div class="row">
+						<div class="col">
+							<div id="photographyPagination">
+								<ul> <pager paged-result="this.Model.Entries"></pager>
+									<li class="prev"><a class="btn btn-quaternary btn-outline" href="#" title="Prev"><i class="fas fa-long-arrow-alt-left"></i>Prev</a></li>
+									<li><a class="btn btn-quaternary btn-outline" href="#" title="1">1</a></li>
+									<li><a class="btn btn-quaternary btn-outline" href="#" title="2">2</a></li>
+									<li><a class="btn btn-quaternary btn-outline" href="#" title="3">3</a></li>
+									<li class="dots">...</li>
+									<li><a class="btn btn-quaternary btn-outline" href="#" title="8">8</a></li>
+									<li class="next"><a class="btn btn-quaternary btn-outline" href="#" title="Next">Next<i class="fas fa-long-arrow-alt-right"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>

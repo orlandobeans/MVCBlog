@@ -154,7 +154,7 @@ namespace MVCBlog.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Blog}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseHealthChecks("/health", new HealthCheckOptions()
